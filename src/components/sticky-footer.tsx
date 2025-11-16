@@ -98,7 +98,7 @@ export function StickyFooter() {
 
             {/* Branding gigante */}
             <motion.h2
-              className="absolute bottom-0 right-0 translate-y-1/3 sm:text-[125px] text-[70px] font-extrabold opacity-20 select-none"
+              className="absolute bottom-0 right-0 translate-y-1/3 sm:text-[60px] md:text-[75px] lg:text-[100px] text-[45px] font-extrabold opacity-20 select-none"
               style={{ color: "#d0d0d0ff" }}
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}

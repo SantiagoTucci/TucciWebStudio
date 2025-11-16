@@ -1,47 +1,83 @@
 "use client"
 
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+
 export function NewReleasePromo() {
+  const ref = useRef(null)
+
+  // Detecta cuando el componente entra al viewport
+  const isInView = useInView(ref, {
+    once: true,
+    margin: "-20% 0px",
+  })
+
   return (
     <section id="faq" className="pb-120 pt-24">
-      <section className="mt-3 w-full">
+
+      <motion.section
+        ref={ref}
+        initial={{ opacity: 0, y: 60, scale: 0.96 }}
+        animate={
+          isInView
+            ? { opacity: 1, y: 0, scale: 1 }
+            : {}
+        }
+        transition={{
+          duration: 0.9,
+          ease: [0.16, 1, 0.3, 1], // easing suave tipo iOS
+        }}
+        className="mt-3 w-full"
+      >
         <div className="mx-auto max-w-4xl rounded-[40px] border border-black/5 dark:border-white/20 p-2 shadow-sm">
-          <div className="relative mx-auto h-[400px] max-w-4xl overflow-hidden rounded-[38px] border border-black/5 dark:border-white/20 bg-cyan-600 p-2 shadow-sm">
 
+          <div
+            className="
+              relative mx-auto 
+              w-full
+              min-h-[460px]
+              sm:min-h-[420px]
+              md:min-h-[480px]
+              lg:min-h-[520px]
+              max-w-4xl overflow-hidden 
+              rounded-[38px] border border-black/5 dark:border-white/20 
+              bg-cyan-600 p-3 shadow-sm
+            "
+          >
             {/* Glow cyan suave */}
-          <div
-            className="absolute inset-0 z-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(8, 145, 178, 0.25), transparent 70%)",
-            }}
-          />
+            <div
+              className="absolute inset-0 z-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(8, 145, 178, 0.25), transparent 70%)",
+              }}
+            />
 
-          {/* Film grain */}
-          <div
-            className="absolute inset-0 z-0 opacity-[0.03]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            }}
-          />
+            {/* Grain */}
+            <div
+              className="absolute inset-0 z-0 opacity-[0.03]"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+              }}
+            />
 
-          <div className="relative z-10">
-            <div className="mt-12 text-center">
-              <h2 className="text-4xl font-semibold text-white mb-4">
-                ¿Querés tu Página Web o Software?
+            {/* Contenido */}
+            <div className="relative z-10 px-6 py-10 sm:py-14 flex flex-col items-center text-center gap-6">
+
+              <h2 className="text-3xl sm:text-5xl font-bold leading-tight text-white drop-shadow-md">
+                ¿Querés tu Página Web<br className="hidden sm:block" /> o Software?
               </h2>
 
-              <p className="text-white/70 mb-10 text-lg">
+              <p className="text-white/80 text-base sm:text-lg max-w-md">
                 Desarrollo sitios modernos, rápidos y con alto impacto visual.
               </p>
 
-              {/* Icono minimal animado: FLECHA HACIA ABAJO */}
               <svg
-                width="70"
-                height="70"
+                width="48"
+                height="48"
                 viewBox="0 0 24 24"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="mx-auto mb-6 stroke-white/80"
+                className="mx-auto stroke-white/80 animate-bounce"
               >
                 <path
                   d="M12 5v14M5 12l7 7 7-7"
@@ -51,74 +87,47 @@ export function NewReleasePromo() {
                 />
               </svg>
 
-              {/* CTA */}
-              <div className="flex items-center justify-center">
-                <a href="https://wa.me/1127082987" target="_blank">
-                  <div className="group border-white/40 bg-white/20 backdrop-blur-sm flex h-[64px] cursor-pointer items-center gap-2 rounded-full border p-[11px] mt-6 transition-all">
-                    <div className="bg-gray-600 flex h-[43px] items-center justify-center rounded-full px-4">
-                      <p className="flex items-center gap-2 font-medium tracking-tight text-white">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="22"
-                          height="22"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="animate-spin"
-                        >
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-                          <path d="M2 12h20"></path>
-                        </svg>
-                        Contactame
-                      </p>
-                    </div>
-                    <div className="flex size-[26px] items-center justify-center rounded-full border-2 border-white/40 transition-all ease-in-out group-hover:ml-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="transition-all ease-in-out group-hover:rotate-45"
-                      >
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                    </div>
+              <a href="https://wa.me/1127082987" target="_blank">
+                <div className="
+                  group flex items-center gap-3 rounded-full
+                  backdrop-blur-md border border-white/30
+                  px-6 py-3 bg-white/10 hover:bg-white/20
+                  transition-all duration-300 cursor-pointer
+                ">
+                  <div className="
+                    bg-cyan-700 group-hover:bg-cyan-600 
+                    px-4 py-2 rounded-full flex items-center gap-2
+                    transition-all
+                  ">
+                    <span className="text-white font-semibold tracking-tight text-sm sm:text-base">
+                      Contactame
+                    </span>
                   </div>
-                </a>
-              </div>
+
+                  <div className="
+                    size-[24px] flex items-center justify-center
+                    border border-white/40 rounded-full
+                    group-hover:translate-x-1 transition-transform
+                  ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="transition-all group-hover:scale-110"
+                    >
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8A8.5 8.5 0 0 1 17.5 5a8.38 8.38 0 0 1 3.5 3.5 8.38 8.38 0 0 1 0 3z"/>
+                    </svg>
+                  </div>
+                </div>
+              </a>
             </div>
-
-            {/* Texteado grande, estilo marca */}
-            <h1
-              className="absolute inset-x-0 mt-[120px] text-center text-[100px] font-semibold text-transparent pointer-events-none sm:mt-[50px] sm:text-[180px]"
-              style={{
-                WebkitTextStroke: "1px rgba(255,255,255,0.2)",
-              }}
-              aria-hidden="true"
-            >
-              contactame
-            </h1>
-
-            <h1
-              className="absolute inset-x-0 mt-[120px] text-center text-[100px] font-semibold text-white/10 pointer-events-none sm:mt-[50px] sm:text-[180px]"
-              aria-hidden="true"
-            >
-              contactame
-            </h1>
           </div>
         </div>
-      </div>
-    </section>
+      </motion.section>
     </section>
   )
 }
