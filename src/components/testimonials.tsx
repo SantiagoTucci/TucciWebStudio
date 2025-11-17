@@ -104,7 +104,7 @@ export function TestimonialsSection() {
 
           {/* Mobile: mostrar TODOS los proyectos */}
           <div className="md:hidden">
-            <Marquee pauseOnHover vertical className="[--duration:18s]">
+            <Marquee pauseOnHover vertical className="[--duration:35s]">
               {portfolioProjects.map((project) => (
                 <ProjectCard key={project.name} {...project} />
               ))}
